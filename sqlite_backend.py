@@ -135,11 +135,10 @@ class SQLiteBackend:
                 "UPDATE players SET score = score + ? WHERE uid = ?", (amount, uid))
 
     def getLatestSnipe(self, uid):
-        # Retrieves the latest snipe associated with a player (either as shooter or target)
+        # Retrieves the latest snipe associated with a player (target)
         with self.conn:
             cursor = self.conn.execute(
-                "SELECT * FROM snipes WHERE shooter_uid = ? OR target_uid = ? ORDER BY timestamp DESC LIMIT 1",
-                (uid, uid))
+                "SELECT * FROM snipes WHERE target_uid = ? ORDER BY timestamp DESC LIMIT 1", (uid,))
             return cursor.fetchone()
 
     def close(self):
