@@ -14,7 +14,7 @@ db = sqlite_backend.SQLiteBackend("assassins.db")
 async def initgame(ctx, password: str):
 
     if (password != "MEOW"):
-        await ctx.response.send_message("Incorrect password.", allowed_mentions=discord.AllowedMentions.none())
+        await ctx.response.send_message("Incorrect password.", allowed_mentions=discord.AllowedMentions.all())
         return
     # "I AM ABSOLUTELY CERTAIN THAT I WANT TO CLEAR THE DATABASE AND START A NEW GAME SLAY":
 
@@ -43,6 +43,6 @@ async def initgame(ctx, password: str):
 
     message = doRound(db, newGame=True)
 
-    await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.none())
+    await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.all())
 
 # Add additional functions if needed

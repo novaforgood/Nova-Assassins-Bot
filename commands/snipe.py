@@ -86,4 +86,4 @@ async def snipe(ctx, target: discord.Member, image: discord.Attachment):
         await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.none())
 
     else:
-        await ctx.response.send_message("You must attach an image to snipe.", allowed_mentions=discord.AllowedMentions.none())
+        await ctx.response.send_message("You must attach an image to snipe.", allowed_mentions=discord.AllowedMentions.all())
