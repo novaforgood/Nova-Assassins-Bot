@@ -30,7 +30,7 @@ def doRound(db: sqlite_backend.SQLiteBackend, newGame=False):
 
     message = ""
     if newGame:
-        message += "New game! "
+        message += "New game!\n\n"
     else:
         message += "New round!\n\n"
     message += "**📸 This round's targets! 🔫**\n"
