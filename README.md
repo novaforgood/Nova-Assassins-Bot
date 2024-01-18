@@ -1,4 +1,4 @@
-# Assassins Bot!
+# Assassins Bot! 🔫
 
 A simple Discord bot for running Assassins for clubs. Every week, players get a target and have to take a picture of them on campus.
 
