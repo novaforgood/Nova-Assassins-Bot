@@ -17,8 +17,10 @@ async def nextround(ctx, password: str):
         return
     # "I AM ABSOLUTELY CERTAIN THAT I WANT TO CLEAR THE DATABASE AND START A NEW GAME SLAY":
 
-    message = doRound(db, newGame=False)
+    messages = doRound(db, newGame=False)
 
-    await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.all())
+    await ctx.response.send_message(messages[0], allowed_mentions=discord.AllowedMentions.all())
+    for i in range(1, len(messages)):
+        await ctx.channel.send(messages[i], allowed_mentions=discord.AllowedMentions.all())
 
 # Add additional functions if needed

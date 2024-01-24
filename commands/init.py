@@ -41,8 +41,10 @@ async def initgame(ctx, password: str):
 
         db.addPlayer(member.id)
 
-    message = doRound(db, newGame=True)
+    messages = doRound(db, newGame=True)
 
-    await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.all())
+    await ctx.response.send_message(messages[0], allowed_mentions=discord.AllowedMentions.all())
+    for i in range(1, len(messages)):
+        await ctx.channel.send(messages[i], allowed_mentions=discord.AllowedMentions.all())
 
 # Add additional functions if needed
