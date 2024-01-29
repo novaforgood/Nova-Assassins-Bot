@@ -8,6 +8,7 @@ from commands.hello import helloworld
 from commands.leaderboard import leaderboard
 from commands.init import initgame
 from commands.next_round import nextround
+from commands.add_player import add_player
 
 intents = discord.Intents.default()
 intents.members = True
@@ -24,6 +25,8 @@ tree.add_command(leaderboard, guilds=[
 tree.add_command(initgame, guilds=[
                  discord.Object(id=GID) for GID in GUILD_IDS])
 tree.add_command(nextround,  guilds=[
+                 discord.Object(id=GID) for GID in GUILD_IDS])
+tree.add_command(add_player, guilds=[
                  discord.Object(id=GID) for GID in GUILD_IDS])
 
 
