@@ -51,6 +51,7 @@ async def snipe(ctx, target: discord.Member, image: discord.Attachment):
                 return
 
             # if it has been less than 2 hours and the shooter is the same don't allow the snipe
+            # TODO: check all snipes of the target, not just the last one 💀
             if timeDifference < 7200 and lastSnipeOfTarget[1] == shooter_uid:
                 await ctx.response.send_message("You can't snipe the same person again so soon!", allowed_mentions=discord.AllowedMentions.none())
                 return
