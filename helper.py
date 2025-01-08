@@ -72,7 +72,7 @@ def getLeaderboardString(db: sqlite_backend.SQLiteBackend):
     message = "🏆 **Assassin's Leaderboard** 🏆\n"
     counter = 0
     for rank, (uid, score, lives) in enumerate(leaderboard_data, start=1):
-        message += f"**{rank}.**\t{score}\t {uidToDisplayString(db, uid)}\n"
+        message += f"**{rank}.**\t{score}\t {uidToDisplayString(db, uid, includeScore=False)}\n"
         counter += 1
         if counter % 10 == 0:
             messages.append(message)
@@ -85,8 +85,8 @@ def getLeaderboardString(db: sqlite_backend.SQLiteBackend):
     return messages
 
 
-def uidToDisplayString(db, uid):
-    hearts = "♥️" * db.getPlayer(uid)[2]
-    if hearts == "":
-        hearts = "💀"
-    return f"<@{uid}>({hearts})"
+def uidToDisplayString(db, uid, includeScore=True):
+    if not includeScore:
+        return f"<@{uid}>"
+    score = db.getPlayer(uid)[1]
+    return f"<@{uid}> (🔫 {score})"

@@ -60,8 +60,8 @@ async def snipe(ctx, target: discord.Member, image: discord.Attachment):
         snipe_id = db.uploadSnipe(
             shooter_uid, target_uid, image_url, success=True)
 
-        # Update the shooter's score
-        db.changeScore(shooter_uid, 100)
+        # # Update the shooter's score
+        # db.changeScore(shooter_uid, 100)
 
         # Get the shooter
         shooter = db.getPlayer(shooter_uid)
@@ -69,7 +69,10 @@ async def snipe(ctx, target: discord.Member, image: discord.Attachment):
 
         # check if the shooter's target is the target
         if shooter[3] == target_uid and target[2] > 0:
-            db.decrementLives(target_uid)
+
+            db.changeScore(shooter_uid, 5)
+
+            # db.decrementLives(target_uid) # TODO: bring back later
             # remove the target from the shooter
             db.setTarget(shooter_uid, None)
 
@@ -79,12 +82,20 @@ async def snipe(ctx, target: discord.Member, image: discord.Attachment):
             if target[2] == 0:
                 message += f"\n{helper.uidToDisplayString(db, target_uid)} is dead!"
         else:
+            db.changeScore(shooter_uid, 1)
             message += f"{helper.uidToDisplayString(db, shooter_uid)} sniped {helper.uidToDisplayString(db, target_uid)}!"
 
-        message += "\n\n"
-        message += image_url
+        # message += "\n\n"
+        # message += image_url
 
-        await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.none())
+        # Download the image and send it as a file
+        file = await image.to_file()
+        await ctx.response.send_message(message, file=file, allowed_mentions=discord.AllowedMentions.none())
+
+        # # download the image
+        # im
+
+        # await ctx.response.send_message(message, allowed_mentions=discord.AllowedMentions.none())
 
     else:
         await ctx.response.send_message("You must attach an image to snipe.", allowed_mentions=discord.AllowedMentions.all())

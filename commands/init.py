@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from helper import assignTargets, doRound
+from bot_config import PLAYER_ROLE
 
 
 import sqlite_backend  # Import the SQLite backend
@@ -33,7 +34,7 @@ async def initgame(ctx, password: str):
         # check that the member has the "W24Assassins" role
         hasRole = False
         for role in member.roles:
-            if role.name == "W24Assassins":
+            if role.name == PLAYER_ROLE:
                 hasRole = True
                 break
         if not hasRole:

@@ -3,6 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 import helper
 from datetime import datetime
+from bot_config import PLAYER_ROLE
 
 import sqlite_backend    # Database handling
 db = sqlite_backend.SQLiteBackend("assassins.db")
@@ -14,11 +15,11 @@ async def add_player(ctx, player: discord.Member):
     # Ensure the player has the "W24Assassins" role
     hasRole = False
     for role in player.roles:
-        if role.name == "W24Assassins":
+        if role.name == PLAYER_ROLE:
             hasRole = True
             break
     if not hasRole:
-        await ctx.response.send_message("That player does not have the W24Assassins role.", allowed_mentions=discord.AllowedMentions.none())
+        await ctx.response.send_message(f"That player does not have the {PLAYER_ROLE} role.", allowed_mentions=discord.AllowedMentions.none())
         return
 
     # Ensure the player is not already in the game
